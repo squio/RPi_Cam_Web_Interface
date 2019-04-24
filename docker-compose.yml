@@ -1,0 +1,17 @@
+version: '3'
+services:
+    rpicam:
+        image: konjak/rpicam
+        restart: always
+        ports:
+            - 80:80
+        environment:
+            - USER_PASS=
+        volumes:
+            - /data/media:/var/www/media
+            - /lib/modules:/lib/modules
+            - /opt/vc:/opt/vc
+        devices:
+            - /dev/snd:/dev/snd
+            - /dev/vcsm:/dev/vcsm
+            - /dev/vchiq:/dev/vchiq

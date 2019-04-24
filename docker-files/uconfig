@@ -1,0 +1,9 @@
+anno_text_size 30
+exposure_compensation 10
+video_width 1640
+video_height 1232
+image_quality 85
+motion_detection true
+motion_external false
+motion_noise 1002
+motion_stopframes 450

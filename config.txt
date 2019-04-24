@@ -1,0 +1,7 @@
+rpicamdir=""
+webserver="nginx"
+webport="80"
+user=""
+webpasswd=""
+autostart="yes"
+phpversion=7
