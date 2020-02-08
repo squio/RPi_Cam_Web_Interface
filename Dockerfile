@@ -1,7 +1,7 @@
-FROM balenalib/rpi-raspbian:stretch
+FROM balenalib/rpi-raspbian:buster
 RUN apt-get update \
  && apt-get upgrade -y \
- && apt-get install -y supervisor nginx php7.0-fpm php7.0-cli php7.0-common php-apcu apache2-utils gpac motion zip libav-tools gstreamer1.0-tools
+ && apt-get install -y supervisor nginx php7.3-fpm php7.3-cli php7.3-common php-apcu apache2-utils gpac motion zip ffmpeg gstreamer1.0-tools
 WORKDIR /rpicam
 COPY bin /rpicam/bin
 COPY etc /rpicam/etc
@@ -18,7 +18,7 @@ RUN chmod o+x *.sh \
 RUN sed -i "s/server_name localhost;/server_name _;/g" /etc/nginx/sites-enabled/rpicam
 COPY docker-files/supervisor.conf			/etc/supervisor.conf
 COPY docker-files/nginx.conf				/etc/nginx/nginx.conf
-COPY docker-files/php-fpm.conf				/etc/php/7.0/fpm/pool.d/www.conf
+COPY docker-files/php-fpm.conf				/etc/php/7.3/fpm/pool.d/www.conf
 COPY docker-files/start_vid.sh				/var/www/macros/start_vid.sh
 COPY docker-files/end_vid.sh				/var/www/macros/end_vid.sh
 COPY docker-files/capture_images.sh			/var/www/macros/capture_images.sh

@@ -4,4 +4,4 @@ webport="80"
 user=""
 webpasswd=""
 autostart="yes"
-phpversion=7
+phpversion=7.3
