@@ -12,3 +12,24 @@ For latest change details see:
 https://github.com/silvanmelchior/RPi_Cam_Web_Interface/commits/master
   
 This version has updates for php7.3 / Buster. May need further changes for nginx
+
+## Build docker file
+
+Using docker compse:
+
+Edit docker-compose.yml:
+
+```yml
+version: '3'
+services:
+    rpicam:
+        # image: konjak/rpicam
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: always
+        # ... etc
+```
+
+Run `sudo docker-compose up --force-recreate`
+
