@@ -46,7 +46,7 @@
 		$data = file_get_contents("userbuttons");
 		$lines = explode("\n", $data);
 		foreach($lines as $line) {
-			if (strlen($line) && (substr($line, 0, 1) != '#') && buttonCount < 6) {
+			if (strlen($line) && (substr($line, 0, 1) != '#') && $buttonCount < 12) {
 				$index = explode(",",$line);
 				if ($index !== false) {
 					$buttonName = $index[0];
@@ -55,7 +55,11 @@
 					if ($className == false) {
 						$className = "btn btn-primary";
 					}
-					$otherAtt  = $index[3];
+					if (count($index) > 3) {
+						$otherAtt  = $index[3];
+					} else {
+						$otherAtt  = "";
+					}
 					$buttonString .= '<input id="' . $buttonName . '" type="button" value="' . $buttonName . '" onclick="send_cmd(' . "'sy " . $macroName . "'" . ')" class="' . $className . '" ' . $otherAtt . '>' . "\r\n";
 					$buttonCount += 1;
 				}
@@ -326,17 +330,18 @@
                            <td>Resolutions:</td>
                            <td>Load Preset: <select onchange="set_preset(this.value)">
 								<?php if(!file_exists('uPresets.html')) : ?>
-                                 <option value="1920 1080 25 25 2592 1944">Select option...</option>
-                                 <option value="1920 1080 25 25 2592 1944">Full HD 1080p 16:9</option>
-                                 <option value="1280 0720 25 25 2592 1944">HD-ready 720p 16:9</option>
-                                 <option value="1296 972 25 25 2592 1944">Max View 972p 4:3</option>
-                                 <option value="768 576 25 25 2592 1944">SD TV 576p 4:3</option>
-                                 <option value="1920 1080 01 30 2592 1944">Full HD Timelapse (x30) 1080p 16:9</option>
+                                 <option value="1920 1080 25 25 2592 1944 1">Select option...</option>
+                                 <option value="1920 1080 25 25 2592 1944 1">Full HD 1080p 16:9</option>
+                                 <option value="1280 0720 25 25 2592 1944 1">HD-ready 720p 16:9</option>
+                                 <option value="1296 972 25 25 2592 1944 1">Max View 972p 4:3</option>
+                                 <option value="768 576 25 25 2592 1944 1">SD TV 576p 4:3</option>
+                                 <option value="1920 1080 01 30 2592 1944 1">Full HD Timelapse (x30) 1080p 16:9</option>
 								 <?php else : include 'uPresets.html'; endif; ?>
                               </select><br>
                               Custom Values:<br>
                               Video res: <?php makeInput('video_width', 4, null, 'number'); ?>x<?php makeInput('video_height', 4, null, 'number'); ?>px<br>
                               Video fps: <?php makeInput('video_fps', 3, null, 'number'); ?>recording, <?php makeInput('MP4Box_fps', 3, null, 'number'); ?>boxing<br>
+                              FPS divider: <?php makeInput('fps_divider', 3, null, 'number'); ?><br>
                               Image res: <?php makeInput('image_width', 4, null, 'number'); ?>x<?php makeInput('image_height', 4, null, 'number'); ?>px<br>
                               <input type="button" value="OK" onclick="set_res();">
                            </td>
